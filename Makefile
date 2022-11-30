@@ -64,8 +64,8 @@ autoformatters: ## runs auto formatters
 	isort santa_unchained
 
 pip-compile:
-	python -m piptools compile -o requirements/base.txt pyproject.toml
-	python -m piptools compile --extra dev -o requirements/dev.txt pyproject.toml
+	python -m piptools compile --resolver=backtracking  -o requirements/base.txt pyproject.toml
+	python -m piptools compile --resolver=backtracking  --extra dev -o requirements/dev.txt pyproject.toml
 
 bootstrap: ## bootstrap project
 	pip install -r requirements/dev.txt
