@@ -1,6 +1,6 @@
 from django import forms
 
-from santa_unchained.wishes.models import WishList
+from santa_unchained.wishes.models import WishList, Address, WishListItem
 
 
 class WishListWithAddressAndItemsForm(forms.ModelForm):
@@ -36,4 +36,34 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
         items_names = [item_name.strip() for item_name in items_names]
         cleaned_data["items"] = items_names
         return cleaned_data
+
+    def _create_wishlist_address_and_items(self) -> WishList:
+        """
+        Create a wish list instance.
+
+        Also, create related address and wish list items based on the payload of the form.
+        """
+        address_data = {
+            "street": self.cleaned_data["street"],
+            "post_code": self.cleaned_data["post_code"],
+            "city": self.cleaned_data["city"],
+            "country": self.cleaned_data["country"],
+        }
+        address = Address.objects.create(**address_data)
+        wish_list = super().save(commit=False)
+        wish_list.address = address
+        wish_list.save()
+        items = [
+            WishListItem(
+                name=name,
+                wish_list=wish_list
+            )
+            for name in self.cleaned_data["items"]
+        ]
+        WishListItem.objects.bulk_create(items)
+        return wish_list
+
+    def save(self, commit=True):
+        return self._create_wishlist_address_and_items()
+
 
