@@ -44,7 +44,10 @@ class Address(models.Model):
         verbose_name_plural = "Addresses"
 
     def __str__(self):
-        return f"Child address: {', '.join([self.street, self.post_code, self.city, self.country])} ({self.pk=})"
+        return (
+            f"Child address: {', '.join([self.street, self.post_code, self.city, self.country])}"
+            f" ({self.pk=})"
+        )
 
 
 class WishList(models.Model):
