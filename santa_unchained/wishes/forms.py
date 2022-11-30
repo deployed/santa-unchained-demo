@@ -1,25 +1,23 @@
 from django import forms
 
-from santa_unchained.wishes.models import WishList, Address, WishListItem
+from santa_unchained.wishes.models import Address, WishList, WishListItem
 
 
 class WishListWithAddressAndItemsForm(forms.ModelForm):
     street = forms.CharField(
         max_length=100,
-        label="Street",
-        help_text="Street and number of a building.",
+        label="Street and number",
     )
     post_code = forms.CharField(
-        max_length=10, label="Postal code", help_text="Postal code."
+        max_length=10,
+        label="Postal code",
     )
-    city = forms.CharField(max_length=100, label="City", help_text="City")
-    country = forms.CharField(
-        max_length=100, label="Country", help_text="Country"
-    )
+    city = forms.CharField(max_length=100, label="City")
+    country = forms.CharField(max_length=100, label="Country")
     items = forms.CharField(
         widget=forms.Textarea,
         label="A wish list",
-        help_text="A relevant wish list the present belongs to.",
+        help_text="A list of gifts the child wants to receive.",
     )
 
     class Meta:
@@ -32,7 +30,7 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        items_names = cleaned_data["items"].split('\n')
+        items_names = cleaned_data["items"].split("\n")
         items_names = [item_name.strip() for item_name in items_names]
         cleaned_data["items"] = items_names
         return cleaned_data
@@ -41,7 +39,8 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
         """
         Create a wish list instance.
 
-        Also, create related address and wish list items based on the payload of the form.
+        Also, create related address and wish list items based on the payload
+        of the form.
         """
         address_data = {
             "street": self.cleaned_data["street"],
@@ -54,10 +53,7 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
         wish_list.address = address
         wish_list.save()
         items = [
-            WishListItem(
-                name=name,
-                wish_list=wish_list
-            )
+            WishListItem(name=name, wish_list=wish_list)
             for name in self.cleaned_data["items"]
         ]
         WishListItem.objects.bulk_create(items)
@@ -65,5 +61,3 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
 
     def save(self, commit=True):
         return self._create_wishlist_address_and_items()
-
-

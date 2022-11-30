@@ -6,6 +6,5 @@ app_name = "wishes"
 
 urlpatterns = [
     path("", WishListFormView.as_view(), name="wishlist"),
-    path("success/<slug:slug>/", WishListSuccessView.as_view(), name="success")
+    path("success/<slug:slug>/", WishListSuccessView.as_view(), name="success"),
 ]
-
