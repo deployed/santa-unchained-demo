@@ -1,12 +1,15 @@
 import pytest
 
-from santa_unchained.wishes.factories import AddressFactory, WishListFactory, WishListItemFactory
+from santa_unchained.wishes.factories import (
+    AddressFactory,
+    WishListFactory,
+    WishListItemFactory,
+)
 from santa_unchained.wishes.models import Address, WishListItem
 
 
 @pytest.mark.django_db()
 class TestAddressModel:
-
     def test_address(self):
         address = AddressFactory()
         assert isinstance(address, Address)

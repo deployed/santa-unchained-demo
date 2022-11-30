@@ -13,22 +13,14 @@ class Address(models.Model):
     street = models.CharField(
         max_length=100,
         verbose_name="Street",
-        help_text="Street and number of a building."
+        help_text="Street and number of a building.",
     )
     post_code = models.CharField(
-        max_length=10,
-        verbose_name="Postal code",
-        help_text="Postal code."
+        max_length=10, verbose_name="Postal code", help_text="Postal code."
     )
-    city = models.CharField(
-        max_length=100,
-        verbose_name="City",
-        help_text="City"
-    )
+    city = models.CharField(max_length=100, verbose_name="City", help_text="City")
     country = models.CharField(
-        max_length=100,
-        verbose_name="Country",
-        help_text="Country"
+        max_length=100, verbose_name="Country", help_text="Country"
     )
     lng = models.DecimalField(
         verbose_name="Longitude",
@@ -81,7 +73,7 @@ class WishList(models.Model):
     slug = AutoSlugField(
         verbose_name="Slug",
         help_text="An automatically generated slug (can be used to construct URLs).",
-        populate_from='name'
+        populate_from="name",
     )
     address = models.ForeignKey(
         Address,
@@ -105,7 +97,7 @@ class WishListItem(models.Model):
         help_text="A relevant wish list the present belongs to.",
         on_delete=models.CASCADE,
         related_name="items",
-        related_query_name ="item",
+        related_query_name="item",
     )
     name = models.CharField(
         max_length=255,

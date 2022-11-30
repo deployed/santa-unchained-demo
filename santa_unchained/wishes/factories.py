@@ -1,10 +1,10 @@
 from operator import itemgetter
 
+import factory.fuzzy
 from faker import Faker
 
 from santa_unchained.wishes.constants import WishListStatuses
 from santa_unchained.wishes.models import Address, WishList, WishListItem
-import factory.fuzzy
 
 fake = Faker()
 
@@ -26,7 +26,9 @@ class WishListFactory(factory.django.DjangoModelFactory):
     email = factory.Faker("email")
     content = factory.Faker("sentences")
     name = factory.Faker("name")
-    status = factory.fuzzy.FuzzyChoice(choices=WishListStatuses.choices, getter=itemgetter(0))
+    status = factory.fuzzy.FuzzyChoice(
+        choices=WishListStatuses.choices, getter=itemgetter(0)
+    )
     address = factory.SubFactory(AddressFactory)
 
 
