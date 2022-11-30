@@ -91,6 +91,9 @@ class WishList(models.Model):
     )
 
     def get_absolute_url(self) -> str:
+        """
+        #TODO replace with a relevant URL.
+        """
         return reverse("accounts:index")
 
     def __str__(self):
