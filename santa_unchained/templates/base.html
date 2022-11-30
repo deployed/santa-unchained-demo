@@ -1,4 +1,5 @@
 {% load static %}
+{% load menu_item_class %}
 
 <!doctype html>
 <html lang="en">
@@ -8,6 +9,7 @@
         <meta name="description" content="Santa Claus letter management app"/>
         <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
         <link rel="stylesheet" href="{% static 'css/chota.min.css' %}">
+        <link rel="stylesheet" href="{% static 'css/css.gg.css' %}">
         <link rel="stylesheet" href="{% static 'css/base.css' %}">
         <title>Santa Unchained</title>
     </head>
@@ -20,8 +22,8 @@
                         Santa Unchained
                     </a>
                     <div class="tabs">
-                        <a>Link 1</a>
-                        <a class="active">Link 2</a>
+                        <a href="{% url 'accounts:index' %}" class="{% get_menu_item_class 'accounts:index' %}">Home</a>
+                        <a href="{% url 'wishes:wishlist' %}" class="{% get_menu_item_class 'wishes:wishlist' %}">Create letter</a>
                     </div>
                 </div>
                 <div class="nav-right">
