@@ -45,7 +45,8 @@ class Address(models.Model):
 
     def __str__(self):
         return (
-            f"Child address: {', '.join([self.street, self.post_code, self.city, self.country])}"
+            f"Child address: "
+            f"{', '.join([self.street, self.post_code, self.city, self.country])}"
             f" ({self.pk=})"
         )
 
