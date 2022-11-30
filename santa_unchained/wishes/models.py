@@ -1,4 +1,5 @@
 from django.db import models
+from django.utils.translation import gettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
 
 from santa_unchained.wishes.constants import WishListStatuses
@@ -12,27 +13,27 @@ class Address(models.Model):
 
     street = models.CharField(
         max_length=100,
-        verbose_name="Street",
-        help_text="Street and number of a building.",
+        verbose_name=_("Street"),
+        help_text=_("Street and number of a building."),
     )
     post_code = models.CharField(
-        max_length=10, verbose_name="Postal code", help_text="Postal code."
+        max_length=10, verbose_name=_("Postal code"), help_text=_("Postal code.")
     )
-    city = models.CharField(max_length=100, verbose_name="City", help_text="City")
+    city = models.CharField(max_length=100, verbose_name=_("City"), help_text=_("City"))
     country = models.CharField(
-        max_length=100, verbose_name="Country", help_text="Country"
+        max_length=100, verbose_name=_("Country"), help_text=_("Country")
     )
     lng = models.DecimalField(
-        verbose_name="Longitude",
-        help_text="Address longitude.",
+        verbose_name=_("Longitude"),
+        help_text=_("Address longitude."),
         max_digits=9,
         decimal_places=6,
         null=True,
         blank=True,
     )
     lat = models.DecimalField(
-        verbose_name="Latitude",
-        help_text="Address latitude.",
+        verbose_name=_("Latitude"),
+        help_text=_("Address latitude."),
         max_digits=9,
         decimal_places=6,
         null=True,
@@ -40,8 +41,8 @@ class Address(models.Model):
     )
 
     class Meta:
-        verbose_name = "Address"
-        verbose_name_plural = "Addresses"
+        verbose_name = _("Address")
+        verbose_name_plural = _("Addresses")
 
     def __str__(self):
         return (
@@ -56,33 +57,33 @@ class WishList(models.Model):
 
     name = models.CharField(
         max_length=255,
-        verbose_name="Name",
-        help_text="Name of a child.",
+        verbose_name=_("Name"),
+        help_text=_("Name of a child."),
     )
     email = models.EmailField(
-        verbose_name="Email address",
-        help_text="Email of a child.",
+        verbose_name=_("Email address"),
+        help_text=_("Email of a child."),
     )
     content = models.TextField(
-        verbose_name="Letter to Santa",
-        help_text="Child's letter to Santa.",
+        verbose_name=_("Letter to Santa"),
+        help_text=_("Child's letter to Santa."),
     )
     status = models.CharField(
         max_length=20,
         choices=WishListStatuses.choices,
         default=WishListStatuses.NEW,
-        verbose_name="Status",
-        help_text="Status of a wish list.",
+        verbose_name=_("Status"),
+        help_text=_("Status of a wish list."),
     )
     slug = AutoSlugField(
-        verbose_name="Slug",
-        help_text="An automatically generated slug (can be used to construct URLs).",
+        verbose_name=_("Slug"),
+        help_text=_("An automatically generated slug (can be used to construct URLs)."),
         populate_from="name",
     )
     address = models.ForeignKey(
         Address,
-        verbose_name="A child's address",
-        help_text="An address where the presents will be delivered.",
+        verbose_name=_("A child's address"),
+        help_text=_("An address where the presents will be delivered."),
         on_delete=models.PROTECT,
         related_name="wish_lists",
         related_query_name="wish_list",
@@ -97,20 +98,20 @@ class WishListItem(models.Model):
 
     wish_list = models.ForeignKey(
         WishList,
-        verbose_name="A wish list",
-        help_text="A relevant wish list the present belongs to.",
+        verbose_name=_("A wish list"),
+        help_text=_("A relevant wish list the present belongs to."),
         on_delete=models.CASCADE,
         related_name="items",
         related_query_name="item",
     )
     name = models.CharField(
         max_length=255,
-        verbose_name="Name",
-        help_text="Name of a present.",
+        verbose_name=_("Name"),
+        help_text=_("Name of a present."),
     )
     approved = models.BooleanField(
-        verbose_name="Approved",
-        help_text="Approved by Santa.",
+        verbose_name=_("Approved"),
+        help_text=_("Approved by Santa."),
         default=True,
     )
 
