@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
 
@@ -88,6 +89,12 @@ class WishList(models.Model):
         related_name="wish_lists",
         related_query_name="wish_list",
     )
+
+    def get_absolute_url(self) -> str:
+        """
+        #TODO replace with a relevant URL.
+        """
+        return reverse("accounts:index")
 
     def __str__(self):
         return f"Wish list for {self.name} ({self.pk=})"

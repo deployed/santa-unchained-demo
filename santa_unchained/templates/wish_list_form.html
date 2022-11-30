@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <div class="card">
+        <header>
+            <h4>Create your wish list!</h4>
+        </header>
+        <form method="post">{% csrf_token %}
+            {{ form.as_p }}
+            <div class="is-right">
+                <input class="button primary" type="submit" value="Send a wish list">
+            </div>
+        </form>
+    </div>
+{% endblock %}
