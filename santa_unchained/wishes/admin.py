@@ -33,6 +33,11 @@ class WishListBaseAdmin(admin.ModelAdmin):
 
     items_count.short_description = _("approved/all items")
 
+    def changeform_view(self, request, object_id=None, form_url='', extra_context=None):
+        extra_context = extra_context or {}
+        extra_context['show_save_and_continue'] = False
+        return super().changeform_view(request, object_id, form_url, extra_context)
+
     def has_add_permission(self, request):
         return False
 
