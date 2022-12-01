@@ -76,7 +76,7 @@ class Address(models.Model):
             return default_lat_lng
         lat = data[0].get("lat", 0)
         lng = data[0].get("lon", 0)
-        return lat, lng
+        return (lat, lng)
 
 
 class WishList(models.Model):
