@@ -113,7 +113,7 @@ class WishListItem(models.Model):
     approved = models.BooleanField(
         verbose_name=_("Approved"),
         help_text=_("Approved by Santa."),
-        default=True,
+        default=False,
     )
 
     def __str__(self):

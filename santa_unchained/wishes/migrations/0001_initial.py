@@ -177,7 +177,7 @@ class Migration(migrations.Migration):
                 (
                     "approved",
                     models.BooleanField(
-                        default=True,
+                        default=False,
                         help_text="Approved by Santa.",
                         verbose_name="Approved",
                     ),
