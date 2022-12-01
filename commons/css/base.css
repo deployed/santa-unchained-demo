@@ -1,13 +1,13 @@
 :root {
     --color-primary: #6DE9AC;
     --color-primary-text: #0f0f0f;
+    --color-secondary: #0C2237
 }
 
 body {
     background-image: linear-gradient(to bottom right, #0f0f0f, #04216b);
     font-family: "Asap", sans-serif;
 }
-
 
 
 main {
@@ -53,18 +53,28 @@ footer .social-icon {
     font-weight: bold;
 }
 
-.button {
-    border-radius: 100px;
-}
-
 .button.primary {
     color: var(--color-primary-text);
+}
+
+.button.secondary {
+    background-color: var(--color-secondary);
+    color: white;
+}
+
+.radius-10 {
+    border-radius: 10px;
+}
+
+.radius-100 {
+    border-radius: 100px;
 }
 
 .card {
     box-shadow: none;
     border: 1px solid lightgray;
-    border-radius: 0;
+    border-radius: 40px;
+    padding: 2rem 3rem;
 }
 
 .stack {

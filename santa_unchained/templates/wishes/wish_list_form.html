@@ -1,15 +1,72 @@
 {% extends 'base.html' %}
-{% load i18n %}
+{% load static i18n %}
+
+{% block extra_styles %}
+  <link rel="stylesheet" href="{% static 'css/wishlist-form.css' %}">
+{% endblock %}
+
 {% block content %}
-  <div class="card">
-    <header>
-      <h4>{% trans "Create your wish list!" %}</h4>
-    </header>
-    <form method="post">{% csrf_token %}
-      {{ form.as_p }}
-      <div class="is-right">
-        <input class="button primary" type="submit" value="Send a wish list">
+  <div class="row">
+    <div class="col-7-md col-12">
+      <div class="card">
+        <div class="form-title">
+          {% trans "Create your" %} <span class="text-primary">{% trans "wish list" %}</span>
+        </div>
+        <div class="form-content">
+          <form method="post">{% csrf_token %}
+            <div class="row">
+              <div class="col-6">
+                <label for="{{ form.name.id_for_label }}">{{ form.name.label }}</label>
+                {{ form.name }}
+              </div>
+              <div class="col-6">
+                <label for="{{ form.email.id_for_label }}">{{ form.email.label }}</label>
+                {{ form.email }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="{{ form.content.id_for_label }}">{{ form.content.label }}</label>
+                {{ form.content }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for="{{ form.street.id_for_label }}">{{ form.street.label }}</label>
+                {{ form.street }}
+              </div>
+              <div class="col-6">
+                <label for="{{ form.city.id_for_label }}">{{ form.city.label }}</label>
+                {{ form.city }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-6">
+                <label for="{{ form.post_code.id_for_label }}">{{ form.post_code.label }}</label>
+                {{ form.post_code }}
+              </div>
+              <div class="col-6">
+                <label for="{{ form.country.id_for_label }}">{{ form.country.label }}</label>
+                {{ form.country }}
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <label for="{{ form.items.id_for_label }}">{{ form.items.label }}</label>
+                {{ form.items }}
+              </div>
+            </div>
+            <div class="is-center">
+              <input class="button secondary radius-10" type="submit" value="Send a wish list">
+            </div>
+          </form>
+        </div>
       </div>
-    </form>
+    </div>
+    <div class="col-5-md col-12">
+      <div class="main-image-container">
+        <img src="{% static 'images/gift.png' %}" alt="Gift" class="main-image">
+      </div>
+    </div>
   </div>
 {% endblock %}
