@@ -3,47 +3,54 @@
 
 <!doctype html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8"/>
-        <meta name="viewport" content="width=device-width,initial-scale=1"/>
-        <meta name="description" content="Santa Claus letter management app"/>
-        <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
-        <link rel="stylesheet" href="{% static 'css/chota.min.css' %}">
-        <link rel="stylesheet" href="{% static 'css/css.gg.css' %}">
-        <link rel="stylesheet" href="{% static 'css/base.css' %}">
-        <title>Santa Unchained</title>
-    </head>
-    <body>
-        <header>
-            <nav class="nav">
-                <div class="nav-left">
-                    <a class="brand" href="/">
-                        <img src="{% static 'images/santa_sleigh.svg' %}" alt="Santa Unchained Logo" id="main-logo">
-                        Santa Unchained
-                    </a>
-                    <div class="tabs">
-                        <a href="{% url 'accounts:index' %}" class="{% get_menu_item_class 'accounts:index' %}">Home</a>
-                        <a href="{% url 'wishes:wishlist' %}" class="{% get_menu_item_class 'wishes:wishlist' %}">Create letter</a>
-                    </div>
-                </div>
-                <div class="nav-right">
-                    <a class="button outline">Button</a>
-                </div>
-            </nav>
-        </header>
-        <main>
-            {% block content %}{% endblock %}
-        </main>
-        <footer class="text-center">
-            <h4>Made by
-                <a href="https://deployed.pl/" target="_blank">
-                    <img src="{% static 'images/deployed.png' %}" alt="Deployed.pl" id="footer-deployed-logo">
-                </a>
-                with
-                <a href="http://kernel.fis.agh.edu.pl/" target="_blank">
-                    <img src="{% static 'images/kernel.png' %}" alt="KNI Kernel" id="footer-kernel-logo">
-                </a>
-            </h4>
-        </footer>
-    </body>
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <meta name="description" content="Santa Claus letter management app"/>
+  <link rel="shortcut icon" type="image/png" href="{% static 'images/favicon.ico' %}"/>
+  <link rel="stylesheet" href="{% static 'css/chota.min.css' %}">
+  <link rel="stylesheet" href="{% static 'css/css.gg.css' %}">
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+  <title>Santa Unchained</title>
+</head>
+<body>
+<div style="display: flex; flex-direction: column; height: 100vh">
+
+  <header>
+    <div class="content">
+      <nav class="nav">
+        <div class="nav-left">
+          <a class="brand" href="/">
+            <img src="{% static 'images/santa_sleigh.svg' %}" alt="Santa Unchained Logo" id="main-logo">
+            Santa Unchained
+          </a>
+          <div class="tabs">
+            <a href="{% url 'accounts:index' %}" class="{% get_menu_item_class 'accounts:index' %}">Home</a>
+            <a href="{% url 'wishes:wishlist' %}" class="{% get_menu_item_class 'wishes:wishlist' %}">Create letter</a>
+          </div>
+        </div>
+      </nav>
+    </div>
+  </header>
+  <main style="flex: 1">
+    <div class="content">
+      <div class="row">
+        <div class="col">{% block content %}{% endblock %}</div>
+      </div>
+    </div>
+  </main>
+  <footer class="text-center">
+    <div class="content">
+      Made by
+        <a href="https://deployed.pl/" target="_blank">
+          <img src="{% static 'images/deployed.png' %}" alt="Deployed.pl" id="footer-deployed-logo">
+        </a>
+        with
+        <a href="http://kernel.fis.agh.edu.pl/" target="_blank">
+          <img src="{% static 'images/kernel.png' %}" alt="KNI Kernel" id="footer-kernel-logo">
+        </a>
+    </div>
+  </footer>
+</div>
+</body>
 </html>
