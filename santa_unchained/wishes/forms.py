@@ -1,6 +1,7 @@
 from django import forms
 from django.utils.translation import gettext_lazy as _
 
+from santa_unchained.wishes.constants import WishListStatuses
 from santa_unchained.wishes.models import Address, WishList, WishListItem
 
 
@@ -23,12 +24,7 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
 
     class Meta:
         model = WishList
-        fields = [
-            "name",
-            "email",
-            "content",
-            "items"
-        ]
+        fields = ["name", "email", "content", "items"]
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -70,3 +66,15 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
 
     def save(self, commit=True):
         return self._create_wishlist_address_and_items()
+
+
+class WishListElfAdminForm(forms.ModelForm):
+    class Meta:
+        model = WishList
+        exclude = ()
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["status"].choices = [
+            (status.value, status.label) for status in WishListStatuses.for_elf()
+        ]

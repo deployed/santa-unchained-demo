@@ -1,13 +1,16 @@
 import requests
-
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
 
 from santa_unchained.wishes.constants import WishListStatuses
-from santa_unchained.wishes.managers import NewWishListManager, RejectedWishListManager, AcceptedWishListManager, \
-    ReadyForShippingWishListManager, DeliveredWishListManager
-
+from santa_unchained.wishes.managers import (
+    AcceptedWishListManager,
+    DeliveredWishListManager,
+    NewWishListManager,
+    ReadyForShippingWishListManager,
+    RejectedWishListManager,
+)
 
 # For longitude and latitude fields motivation:
 # https://stackoverflow.com/questions/30706799/which-model-field-to-use-in-django-to-store-longitude-and-latitude-values
@@ -50,9 +53,7 @@ class Address(models.Model):
         verbose_name_plural = _("Addresses")
 
     def __str__(self):
-        return (
-            f"{', '.join([self.street, self.post_code, self.city, self.country])}"
-        )
+        return f"{', '.join([self.street, self.post_code, self.city, self.country])}"
 
     def save(
         self, force_insert=False, force_update=False, using=None, update_fields=None
@@ -68,7 +69,9 @@ class Address(models.Model):
         """
         default_lat_lng = (0, 0)
         try:
-            url = f"https://nominatim.openstreetmap.org/search.php?q={str(self)}&format=jsonv2"
+            url = (
+                f"https://nominatim.openstreetmap.org/search.php?q={self}&format=jsonv2"
+            )
             data = requests.get(url).json()
         except requests.exceptions.RequestException:
             return default_lat_lng

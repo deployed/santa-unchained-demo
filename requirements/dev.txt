@@ -51,10 +51,6 @@ factory-boy==3.2.1
 faker==15.3.3
     # via factory-boy
 flake8==5.0.4
-    # via
-    #   flake8-formatter-abspath
-    #   santa-unchained (pyproject.toml)
-flake8-formatter-abspath==1.0.1
     # via santa-unchained (pyproject.toml)
 idna==3.4
     # via requests
