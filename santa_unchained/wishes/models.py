@@ -36,16 +36,14 @@ class Address(models.Model):
         help_text=_("Address longitude."),
         max_digits=9,
         decimal_places=6,
-        null=True,
-        blank=True,
+        default=0,
     )
     lat = models.DecimalField(
         verbose_name=_("Latitude"),
         help_text=_("Address latitude."),
         max_digits=9,
         decimal_places=6,
-        null=True,
-        blank=True,
+        default=0,
     )
 
     class Meta:
