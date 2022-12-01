@@ -1,4 +1,5 @@
 from django import forms
+from django.utils.translation import gettext_lazy as _
 
 from santa_unchained.wishes.models import Address, WishList, WishListItem
 
@@ -26,7 +27,15 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
             "name",
             "email",
             "content",
+            "items"
         ]
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.fields["name"].help_text = _("Your name")
+        self.fields["email"].help_text = _("Your e-mail")
+        self.fields["content"].help_text = _("Your letter to Santa")
+        self.fields["items"].help_text = _("List of gifts, every gift in new line")
 
     def clean(self):
         cleaned_data = super().clean()
