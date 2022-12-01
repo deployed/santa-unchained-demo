@@ -21,10 +21,24 @@ footer {
 
 footer .logo-deployed {
     max-width: 200px;
+    border-left: 3px solid black;
+    padding-left: 15px;
+    margin-left: 10px;
 }
+
+
+footer .logo-kernel {
+    height: 45px;
+    margin-bottom: -8px;
+}
+
 
 footer .social-icon {
     width: 100px;
+}
+
+.logs-container {
+    margin-bottom: 10px;
 }
 
 .content-wrapper {
