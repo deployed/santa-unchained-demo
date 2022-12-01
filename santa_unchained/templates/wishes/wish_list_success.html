@@ -1,10 +1,30 @@
 {% extends 'base.html' %}
+{% load static i18n %}
+
+{% block extra_styles %}
+  <link rel="stylesheet" href="{% static 'css/index.css' %}">
+{% endblock %}
 
 {% block content %}
-  <div class="card">
-    <header>
-      <h4>Thanks for your letter!</h4>
-    </header>
-    <p>Tou can track the status of your wish list <a href="{% url 'wishes:wishlist-detail' slug %}">here</a>.</p>
+  <div class="row">
+    <div class="col-7">
+      <div class="text-container">
+        <div class="badge">
+          {% trans "Done!" %}
+        </div>
+        <h1 class="text-header-1">{% trans "Thanks for your" %}</h1>
+        <h2 class="text-header-2">{% trans "letter!" %}</h2>
+        <h3 class="text-header-3">{% trans "You can track the status of your wishlist" %}</h3>
+        <div class="button-container">
+          <a class="button primary radius-100"
+             href="{% url 'wishes:wishlist-detail' slug %}">{% trans "Track order" %}</a>
+        </div>
+      </div>
+    </div>
+    <div class="col-5">
+      <div class="main-image-container">
+        <img src="{% static 'images/thankyou.png' %}" alt="Thank you" class="main-image">
+      </div>
+    </div>
   </div>
 {% endblock %}

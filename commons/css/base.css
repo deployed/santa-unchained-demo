@@ -53,8 +53,23 @@ footer .social-icon {
     font-weight: bold;
 }
 
+.nav a.button {
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
+.button {
+    font-weight: bold;
+    padding-left: 50px;
+    padding-right: 50px;
+}
+
 .button.primary {
     color: var(--color-primary-text);
+}
+
+.button.primary.active {
+    background-color: #E88D9D;
 }
 
 .button.secondary {
