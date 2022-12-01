@@ -5,6 +5,6 @@
         <header>
             <h4>Thanks for your letter!</h4>
         </header>
-        <p>Tou can track the status of your wish list <a href="{{ wishlist_url }}" target="_blank">here</a>.</p>
+        <p>Tou can track the status of your wish list <a href="{% url 'wishes:wishlist-detail' slug %}">here</a>.</p>
     </div>
 {% endblock %}

@@ -24,7 +24,7 @@ class WishListFactory(factory.django.DjangoModelFactory):
         model = WishList
 
     email = factory.Faker("email")
-    content = factory.Faker("sentences")
+    content = factory.Faker("paragraph")
     name = factory.Faker("name")
     status = factory.fuzzy.FuzzyChoice(
         choices=WishListStatuses.choices, getter=itemgetter(0)
@@ -36,6 +36,6 @@ class WishListItemFactory(factory.django.DjangoModelFactory):
     class Meta:
         model = WishListItem
 
-    name = factory.fuzzy.FuzzyText()
+    name = factory.Faker("word")
     wish_list = factory.SubFactory(WishListFactory)
     approved = factory.fuzzy.FuzzyChoice(choices=(True, False))
