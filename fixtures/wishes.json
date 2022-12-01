@@ -1,0 +1,77 @@
+[
+{
+    "model": "wishes.address",
+    "pk": 1,
+    "fields": {
+        "street": "Lea",
+        "post_code": "114",
+        "city": "Kraków",
+        "country": "Polska",
+        "lng": "19.902106",
+        "lat": "50.071832"
+    }
+},
+{
+    "model": "wishes.address",
+    "pk": 2,
+    "fields": {
+        "street": "Jana Matejki 1/5",
+        "post_code": "00-481",
+        "city": "Warszawa",
+        "country": "Polska",
+        "lng": "21.025711",
+        "lat": "52.224361"
+    }
+},
+{
+    "model": "wishes.wishlist",
+    "pk": 1,
+    "fields": {
+        "name": "Joe Kernel",
+        "email": "kernel@example.com",
+        "content": "Dear Santa and helpers, \r\nI have been very good this year. I am expecting a little sister. I don’t want her. Momy says her will be fun. I heard girls stink. I will trade you my sister when she comes from the stork for a elf. I want a race car and a Garage set for Christmas. There will be sugar cookies and burritos waiting for you. \r\n\r\nThank you, Santa",
+        "status": "NEW",
+        "slug": "lisa-smith",
+        "address": 1
+    }
+},
+{
+    "model": "wishes.wishlist",
+    "pk": 2,
+    "fields": {
+        "name": "Michael",
+        "email": "child@example.com",
+        "content": "Dear Santa, \r\nI want new car for my dad.\r\n\r\nThanks",
+        "status": "NEW",
+        "slug": "michael",
+        "address": 2
+    }
+},
+{
+    "model": "wishes.wishlistitem",
+    "pk": 1,
+    "fields": {
+        "wish_list": 1,
+        "name": "Lego blocks",
+        "approved": false
+    }
+},
+{
+    "model": "wishes.wishlistitem",
+    "pk": 2,
+    "fields": {
+        "wish_list": 1,
+        "name": "Sister",
+        "approved": false
+    }
+},
+{
+    "model": "wishes.wishlistitem",
+    "pk": 3,
+    "fields": {
+        "wish_list": 2,
+        "name": "car",
+        "approved": true
+    }
+}
+]

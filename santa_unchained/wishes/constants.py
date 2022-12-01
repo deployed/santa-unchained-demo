@@ -8,3 +8,7 @@ class WishListStatuses(models.TextChoices):
     REJECTED = "REJECTED", _("Rejected")
     READY_FOR_SHIPPING = "READY_FOR_SHIPPING", _("Ready for shipping")
     DELIVERED = "DELIVERED", _("Delivered")
+
+    @classmethod
+    def for_elf(cls):
+        return [cls.ACCEPTED, cls.READY_FOR_SHIPPING]
