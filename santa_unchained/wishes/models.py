@@ -122,6 +122,10 @@ class WishList(models.Model):
     def __str__(self):
         return _("Wish list for {}").format(self.name)
 
+    @classmethod
+    def number_of_objects(cls):
+        return cls.objects.count()
+
 
 class WishListNew(WishList):
     objects = NewWishListManager()
