@@ -1,48 +1,67 @@
 {% extends 'base.html' %}
+{% load static i18n %}
+
+{% block extra_styles %}
+  <link rel="stylesheet" href="{% static 'css/wishlist.css' %}">
+{% endblock %}
+
 
 {% block content %}
-  <div class="card">
-    <h2>Wish list details:</h2>
-    <table class="striped">
-      <tr>
-        <th>Name</th>
-        <td>{{ object.name }}</td>
-      </tr>
-      <tr>
-        <th>Email</th>
-        <td>{{ object.email }}</td>
-      </tr>
-      <tr>
-        <th>Content</th>
-        <td>{{ object.content }}</td>
-      </tr>
-      <tr>
-        <th>Status</th>
-        <td>{{ object.status }}</td>
-      </tr>
-      <tr>
-        <th>Address</th>
-        <td>{{ object.address }}</td>
-      </tr>
-    </table>
-    <h2>Items:</h2>
-    <table class="striped">
-      <tr>
-        <th>Item</th>
-        <th>Approved?</th>
-      </tr>
-      {% for item in object.items.all %}
-        <tr>
-          <td>{{ item.name }}</td>
-          <td>
-            {% if item.approved == True %}
-              <i class="gg-check-r"></i>
-            {% else %}
-              <i class="gg-close-r"></i>
-            {% endif %}
-          </td>
-        </tr>
-      {% endfor %}
-    </table>
+  <div class="row">
+    <div class="col-7-md col-12">
+      <div class="card">
+        <div class="form-title">
+          {% trans "Wishlist" %} <span class="text-primary">{% trans "details" %}</span>
+        </div>
+        <div class="form-content">
+          <table>
+            <tr>
+              <th>{% trans "Name" %}:</th>
+              <td>{{ object.name }}</td>
+            </tr>
+            <tr>
+              <th>{% trans "Email" %}:</th>
+              <td>{{ object.email }}</td>
+            </tr>
+            <tr>
+              <th>{% trans "Content" %}:</th>
+              <td>{{ object.content }}</td>
+            </tr>
+            <tr>
+              <th>{% trans "Status" %}:</th>
+              <td>{{ object.status }}</td>
+            </tr>
+            <tr>
+              <th>{% trans "Address" %}:</th>
+              <td>{{ object.address }}</td>
+            </tr>
+          </table>
+          <hr>
+          <table class="striped">
+            <tr>
+              <th>{% trans "Item" %}</th>
+              <th>{% trans "Approved?" %}</th>
+            </tr>
+            {% for item in object.items.all %}
+              <tr>
+                <td>{{ item.name }}</td>
+                <td>
+                  {% if item.approved == True %}
+                    <i class="gg-check-r"></i>
+                  {% else %}
+                    <i class="gg-close-r"></i>
+                  {% endif %}
+                </td>
+              </tr>
+            {% endfor %}
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="col-5-md col-12 is-center">
+      <div class="main-image-container">
+        <img src="{% static 'images/delivery.png' %}" alt="Thank you" class="main-image">
+      </div>
+    </div>
   </div>
 {% endblock %}

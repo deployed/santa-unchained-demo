@@ -10,3 +10,11 @@ label {
 input:not([type=checkbox]):not([type=radio]):not([type=submit]):not([type=color]):not([type=button]):not([type=reset]), select, textarea, textarea[type=text] {
     border-radius: 10px;
 }
+
+i.gg-close-r{
+    color: var(--color-error);
+}
+
+i.gg-check-r{
+    color: var(--color-success);
+}

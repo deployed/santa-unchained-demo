@@ -27,7 +27,8 @@
         </div>
         <div class="nav-right">
           <a href="{% url 'accounts:index' %}">{% trans "Home" %}</a>
-          <a href="{% url 'wishes:wishlist' %}" class="button primary radius-100 {% get_menu_item_class 'wishes:wishlist' %}">{% trans "Create letter" %}</a>
+          <a href="{% url 'wishes:wishlist' %}"
+             class="button primary radius-100 {% get_menu_item_class 'wishes:wishlist' %}">{% trans "Create letter" %}</a>
         </div>
       </nav>
     </div>
