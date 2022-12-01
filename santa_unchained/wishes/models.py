@@ -1,9 +1,13 @@
+import requests
+
 from django.db import models
-from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django_extensions.db.fields import AutoSlugField
 
 from santa_unchained.wishes.constants import WishListStatuses
+from santa_unchained.wishes.managers import NewWishListManager, RejectedWishListManager, AcceptedWishListManager, \
+    ReadyForShippingWishListManager, DeliveredWishListManager
+
 
 # For longitude and latitude fields motivation:
 # https://stackoverflow.com/questions/30706799/which-model-field-to-use-in-django-to-store-longitude-and-latitude-values
@@ -47,10 +51,32 @@ class Address(models.Model):
 
     def __str__(self):
         return (
-            f"Child address: "
             f"{', '.join([self.street, self.post_code, self.city, self.country])}"
-            f" ({self.pk=})"
         )
+
+    def save(
+        self, force_insert=False, force_update=False, using=None, update_fields=None
+    ):
+        if not (self.lat and self.lng):
+            self.lat, self.lng = self.find_lat_lng()
+        super().save(force_insert, force_update, using, update_fields)
+
+    def find_lat_lng(self):
+        """
+        Find location in OpenStreetMap and return coordinates.
+        If API fail or not return any results, we return default coordinates 0, 0
+        """
+        default_lat_lng = (0, 0)
+        try:
+            url = f"https://nominatim.openstreetmap.org/search.php?q={str(self)}&format=jsonv2"
+            data = requests.get(url).json()
+        except requests.exceptions.RequestException:
+            return default_lat_lng
+        if not data:
+            return default_lat_lng
+        lat = data[0].get("lat", 0)
+        lng = data[0].get("lon", 0)
+        return lat, lng
 
 
 class WishList(models.Model):
@@ -90,8 +116,56 @@ class WishList(models.Model):
         related_query_name="wish_list",
     )
 
+    class Meta:
+        ordering = ("-id",)
+
     def __str__(self):
-        return f"Wish list for {self.name} ({self.pk=})"
+        return _("Wish list for {}").format(self.name)
+
+
+class WishListNew(WishList):
+    objects = NewWishListManager()
+
+    class Meta:
+        proxy = True
+        verbose_name = _("new wish list")
+        verbose_name_plural = _("1. New wish lists")
+
+
+class WishListAccepted(WishList):
+    objects = AcceptedWishListManager()
+
+    class Meta:
+        proxy = True
+        verbose_name = _("accepted wish list")
+        verbose_name_plural = _("2. Accepted wish lists")
+
+
+class WishListRejected(WishList):
+    objects = RejectedWishListManager()
+
+    class Meta:
+        proxy = True
+        verbose_name = _("rejected wish list")
+        verbose_name_plural = _("3. Rejected wish lists")
+
+
+class WishListReadyForShipping(WishList):
+    objects = ReadyForShippingWishListManager()
+
+    class Meta:
+        proxy = True
+        verbose_name = _("wish list ready for shipping")
+        verbose_name_plural = _("4. Wish lists ready for shipping")
+
+
+class WishListDelivered(WishList):
+    objects = DeliveredWishListManager()
+
+    class Meta:
+        proxy = True
+        verbose_name = _("delivered wish list")
+        verbose_name_plural = _("5. Delivered wish lists")
 
 
 class WishListItem(models.Model):
@@ -117,4 +191,4 @@ class WishListItem(models.Model):
     )
 
     def __str__(self):
-        return f"Wish list item: {self.name} ({self.pk=})"
+        return _("Wish list item: {}").format(self.name)
