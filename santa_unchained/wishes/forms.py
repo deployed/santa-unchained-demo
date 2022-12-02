@@ -38,7 +38,7 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
 
     def clean(self):
         cleaned_data = super().clean()
-        items_names = cleaned_data["items"].split("\n")
+        items_names = cleaned_data.get("items", "").split("\n")
         items_names = [item_name.strip() for item_name in items_names]
         cleaned_data["items"] = items_names
         return cleaned_data
