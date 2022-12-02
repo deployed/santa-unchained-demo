@@ -1,4 +1,5 @@
 from django import forms
+from django.db.transaction import atomic
 from django.utils.translation import gettext_lazy as _
 
 from santa_unchained.wishes.constants import WishListStatuses
@@ -43,7 +44,8 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
         cleaned_data["items"] = items_names
         return cleaned_data
 
-    def _create_wishlist_address_and_items(self) -> WishList:
+    @atomic
+    def create_address_and_items(self, wish_list: WishList) -> WishList:
         """
         Create a wish list instance.
 
@@ -57,7 +59,6 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
             "country": self.cleaned_data["country"],
         }
         address = Address.objects.create(**address_data)
-        wish_list = super().save(commit=False)
         wish_list.address = address
         wish_list.save()
         items = [
@@ -68,7 +69,8 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
         return wish_list
 
     def save(self, commit=True):
-        return self._create_wishlist_address_and_items()
+        wish_list = super().save(commit=False)
+        return self.create_address_and_items(wish_list)
 
 
 class WishListElfAdminForm(forms.ModelForm):
