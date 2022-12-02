@@ -1,7 +1,7 @@
 from django.contrib import admin, messages
 from django.utils.translation import gettext_lazy as _
 
-from santa_unchained.constants import Role
+from santa_unchained.accounts.constants import Role
 from santa_unchained.wishes.constants import WishListStatuses
 from santa_unchained.wishes.forms import WishListElfAdminForm
 from santa_unchained.wishes.models import (
