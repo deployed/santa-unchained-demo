@@ -32,10 +32,13 @@ class WishListWithAddressAndItemsForm(forms.ModelForm):
         self.fields["email"].help_text = _("Your e-mail")
         self.fields["content"].help_text = _("Your letter to Santa")
         self.fields["items"].help_text = _("List of gifts, every gift in new line")
+        self.fields["items"].help_text = _("List of gifts, every gift in new line")
+        self.fields["items"].widget.attrs = {"rows": 4}
+        self.fields["content"].widget.attrs = {"rows": 4}
 
     def clean(self):
         cleaned_data = super().clean()
-        items_names = cleaned_data["items"].split("\n")
+        items_names = cleaned_data.get("items", "").split("\n")
         items_names = [item_name.strip() for item_name in items_names]
         cleaned_data["items"] = items_names
         return cleaned_data
