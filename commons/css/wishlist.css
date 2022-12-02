@@ -18,3 +18,7 @@ i.gg-close-r{
 i.gg-check-r{
     color: var(--color-success);
 }
+
+form p.text-error{
+    font-size: 1.3rem;
+}
